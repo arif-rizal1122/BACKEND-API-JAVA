@@ -2,15 +2,19 @@ package com.simple.api.simple_api.service.product;
 
 import java.util.List;
 
+import com.simple.api.simple_api.dto.request.CreateProductRequest;
+import com.simple.api.simple_api.dto.request.UpdateProductRequest;
 import com.simple.api.simple_api.model.Product;
 
 public interface IProductService {
 
-    Product addProduct(Product product);
+    Product getProductById(Long id);
+
+    Product addProduct(CreateProductRequest request);
 
     void deleteProductById(Long id);
 
-    void updateProduct(Product product, Long productId);
+    Product updateProduct(UpdateProductRequest request, Long productId);
 
     List<Product> getAllProducts();
 
