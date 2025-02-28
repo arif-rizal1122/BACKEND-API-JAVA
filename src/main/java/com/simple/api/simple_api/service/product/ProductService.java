@@ -3,7 +3,6 @@ package com.simple.api.simple_api.service.product;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.simple.api.simple_api.dto.request.CreateProductRequest;
@@ -21,10 +20,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductService implements IProductService{
 
-    @Autowired
     private final ProductRepository productRepository;
 
-    @Autowired
     private final CategoryRepository categoryRepository;
 
     // 

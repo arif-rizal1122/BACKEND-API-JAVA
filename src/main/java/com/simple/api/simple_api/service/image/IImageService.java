@@ -1,7 +1,10 @@
 package com.simple.api.simple_api.service.image;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
+import com.simple.api.simple_api.dto.helper.ImageDto;
 import com.simple.api.simple_api.model.Image;
 
 public interface IImageService {
@@ -10,7 +13,7 @@ public interface IImageService {
 
     void deleteImageById(Long id);
 
-    Image saveImage(MultipartFile file, Long productId);
+    List<ImageDto> saveImages(List<MultipartFile> files, Long productId);
 
     void updateImage(MultipartFile file, Long imageId);
 

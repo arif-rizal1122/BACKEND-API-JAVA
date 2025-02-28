@@ -3,7 +3,6 @@ package com.simple.api.simple_api.service.category;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.simple.api.simple_api.exception.AlreadyExistException;
@@ -18,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CategoryService implements ICategoryService {
 
-    @Autowired
     private final CategoryRepository categoryRepository;
 
 
@@ -62,7 +60,7 @@ public class CategoryService implements ICategoryService {
     @Override
     public Category addCategory(Category category) {
         return Optional.of(category).filter(c -> !categoryRepository.existsByName(c.getName()))
-        .map(categoryRepository ::save).orElseThrow(() -> new AlreadyExistException(category.getName() + " already exists"));
+        .map(categoryRepository ::save).orElseThrow(() -> new AlreadyExistException(category.getName() + "category is not found!!"));
     }
 
 
