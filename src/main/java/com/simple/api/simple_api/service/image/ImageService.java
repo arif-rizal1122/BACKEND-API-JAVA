@@ -46,34 +46,40 @@ public class ImageService implements IImageService{
     public List<ImageDto> saveImages(List<MultipartFile> files, Long productId) {
         Product product = productService.getProductById(productId);
         List<ImageDto> saveImageDtos = new ArrayList<>();
-        for(MultipartFile file : files){
+    
+        for (MultipartFile file : files) {
             try {
+                // Buat objek Image baru
                 Image image = new Image();
                 image.setFileName(file.getOriginalFilename());
                 image.setFileType(file.getContentType());
                 image.setImage(new SerialBlob(file.getBytes()));
                 image.setProduct(product);
-
-                String buildDownloadUrl ="/api/v1/images/image/download ";
-                String downloadURL = buildDownloadUrl + image.getId();
-                image.setDownloadURL(downloadURL);
+    
+                // Simpan pertama kali agar mendapatkan ID
                 Image savedImage = imageRepository.save(image);
-
-                savedImage.setDownloadURL(buildDownloadUrl + image.getId());
+    
+                // Set URL download dengan ID yang sudah ada
+                String downloadURL = "/api/v1/images/image/download/" + savedImage.getId();
+                savedImage.setDownloadURL(downloadURL);
+    
+                // Simpan ulang setelah downloadURL diperbarui
                 imageRepository.save(savedImage);
-
+    
+                // Konversi ke DTO
                 ImageDto imageDto = new ImageDto();
                 imageDto.setImageId(savedImage.getId());
                 imageDto.setImageName(savedImage.getFileName());
                 imageDto.setDownloadURL(savedImage.getDownloadURL());
                 saveImageDtos.add(imageDto);
+    
             } catch (IOException | SQLException e) {
-                throw new RuntimeException(e.getMessage());
+                throw new RuntimeException("Error saving image: " + e.getMessage());
             }
         }
-
         return saveImageDtos;
     }
+    
 
 
     
