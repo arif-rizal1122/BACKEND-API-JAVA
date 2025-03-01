@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.simple.api.simple_api.dto.response.ApiResponse;
 import com.simple.api.simple_api.exception.AlreadyExistException;
+import com.simple.api.simple_api.exception.ResponseNotFoundException;
 import com.simple.api.simple_api.model.Category;
 import com.simple.api.simple_api.service.category.ICategoryService;
 
@@ -84,18 +85,17 @@ public class CategoryController {
 
    @DeleteMapping("/category/{categoryId}/delete")
    public ResponseEntity<ApiResponse> deleteCategory(@PathVariable("categoryId") Long categoryId){
-     
-      try {
-          boolean isDeleted = categoryService.deleteCategoryById(categoryId);
-         if (isDeleted) {
-           return ResponseEntity.ok(new ApiResponse("get category by name success!", isDeleted)); 
-         }
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("failed get category by name", HttpStatus.NOT_FOUND));
-    } catch (Exception e) {
-           return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse("failed get category name", e.getMessage()));        
-    }
+       try {
+        categoryService.deleteCategoryById(categoryId);
+         return ResponseEntity.ok(new ApiResponse("delete category success!!", categoryId));
+      } catch (ResponseNotFoundException e) {
+         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("category not found!!", null));
+      } catch (Exception e){
+         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse("delete category failed", e.getMessage()));
+      }
    }
 
+   
 
    @PutMapping("/category/{categoryId}/update")
    public ResponseEntity<ApiResponse> updateCategory(@RequestBody Category category, 

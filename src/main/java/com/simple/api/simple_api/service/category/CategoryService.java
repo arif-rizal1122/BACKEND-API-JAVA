@@ -2,7 +2,6 @@ package com.simple.api.simple_api.service.category;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.stereotype.Service;
 
@@ -47,16 +46,12 @@ public class CategoryService implements ICategoryService {
 
     //
     @Override
-    public boolean deleteCategoryById(Long id) {
-        AtomicBoolean isDeleted = new AtomicBoolean(false);
-
-        categoryRepository.findById(id).ifPresentOrElse(category -> {
-            categoryRepository.delete(category);
-            isDeleted.set(true);
-        }, () -> {
-            throw new ResponseNotFoundException("category not found!!");
-        });
-        return isDeleted.get();
+    public void deleteCategoryById(Long id) {
+        categoryRepository.findById(id).ifPresentOrElse(categoryRepository::delete, 
+          () -> {
+             new ResponseNotFoundException("category not found!!");
+          }
+        );
     }
 
 
