@@ -49,7 +49,7 @@ public class ImageController {
 
     @GetMapping("/image/download/{imageId}")
     public ResponseEntity<Resource> downloadImage(@PathVariable("imageId") Long imageId) throws SQLException {
-           Image image = imageService.getIMageById(imageId);
+            Image image = imageService.getIMageById(imageId);
 
             ByteArrayResource resource = new ByteArrayResource(image.getImage().getBytes(1, (int) image.getImage().length()));
             return ResponseEntity.ok().contentType(MediaType.parseMediaType(image.getFileType()))

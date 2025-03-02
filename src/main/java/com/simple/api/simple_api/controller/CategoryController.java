@@ -44,6 +44,10 @@ public class CategoryController {
     public ResponseEntity<ApiResponse> addCategory(@RequestBody Category name)
    {
        try {
+        if (name == null || name.getName() == null) {
+            return ResponseEntity.badRequest().body(new ApiResponse("category name is required", null));
+        }
+
         Category theCategory = categoryService.addCategory(name);
         return ResponseEntity.ok(new ApiResponse("created category success", theCategory));
         } catch (AlreadyExistException e) {
