@@ -2,6 +2,7 @@ package com.simple.api.simple_api.service.product;
 
 import java.util.List;
 
+import com.simple.api.simple_api.dto.helper.ProductDto;
 import com.simple.api.simple_api.dto.request.CreateProductRequest;
 import com.simple.api.simple_api.dto.request.UpdateProductRequest;
 import com.simple.api.simple_api.model.Product;
@@ -29,4 +30,8 @@ public interface IProductService {
     List<Product> getProductsByBrandAndName(String brand, String name);
 
     Long countProductsByBrandAndName(String brand, String name);
+
+    List<ProductDto> getConvertedProducts(List<Product> products);
+
+    ProductDto convertToDto(Product product);
 }

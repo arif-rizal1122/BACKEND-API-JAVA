@@ -32,7 +32,7 @@ public class Image {
 
     @Lob
     private Blob image;
-
+    
     private String downloadURL;
 
     @ManyToOne()
