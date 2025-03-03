@@ -27,7 +27,7 @@ public class CartItemService implements ICartItemService{
     private final CartRepository cartRepository;
 
     @Override
-    public void addCartItem(Long cartId, Long productId, int quantity) {
+    public void addItemToCart(Long cartId, Long productId, Integer quantity) {
         //1. get the cart
         //2. get the product
         //3. check if the product already in the cart
@@ -68,7 +68,7 @@ public class CartItemService implements ICartItemService{
 
 
     @Override
-    public void updateItemQuantity(Long cartId, Long productId, int quantity) {
+    public void updateItemQuantity(Long cartId, Long productId, Integer quantity) {
         Cart cart = cartService.getCart(cartId);
         cart.getItems().stream()
             .filter(item -> item.getProduct().getId().equals(productId))
