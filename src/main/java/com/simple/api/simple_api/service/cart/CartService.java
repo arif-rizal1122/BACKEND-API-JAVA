@@ -2,6 +2,7 @@ package com.simple.api.simple_api.service.cart;
 
 import java.math.BigDecimal;
 
+
 import org.springframework.stereotype.Service;
 
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
@@ -9,15 +10,18 @@ import com.simple.api.simple_api.model.Cart;
 import com.simple.api.simple_api.repository.CartItemRepository;
 import com.simple.api.simple_api.repository.CartRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class CartService implements ICartService{
 
     private final CartRepository cartRepository; 
-
+    
     private final CartItemRepository cartItemRepository;
+
 
 
 
@@ -44,7 +48,11 @@ public class CartService implements ICartService{
         Cart cart = getCart(id);
         return cart.getTotalAmount();
     }
-    
 
+    @Override
+    public Long initializeNewCart() {
+        Cart newCart = new Cart();
+        return cartRepository.save(newCart).getId(); 
+    }
     
 }
