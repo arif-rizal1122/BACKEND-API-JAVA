@@ -2,7 +2,7 @@ package com.simple.api.simple_api.service.user;
 
 import com.simple.api.simple_api.dto.request.CreateUserRequest;
 import com.simple.api.simple_api.dto.request.UpdateUserRequest;
-import com.simple.api.simple_api.model.User;
+import com.simple.api.simple_api.repository.model.User;
 
 public interface IUserService {
     

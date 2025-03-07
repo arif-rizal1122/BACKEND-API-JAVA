@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.simple.api.simple_api.dto.helper.ImageDto;
-import com.simple.api.simple_api.model.Image;
+import com.simple.api.simple_api.dto.response.ImageDto;
+import com.simple.api.simple_api.repository.model.Image;
 
 public interface IImageService {
     

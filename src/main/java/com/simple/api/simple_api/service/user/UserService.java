@@ -8,8 +8,8 @@ import com.simple.api.simple_api.dto.request.CreateUserRequest;
 import com.simple.api.simple_api.dto.request.UpdateUserRequest;
 import com.simple.api.simple_api.exception.AlreadyExistException;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
-import com.simple.api.simple_api.model.User;
 import com.simple.api.simple_api.repository.UserRepository;
+import com.simple.api.simple_api.repository.model.User;
 
 import lombok.RequiredArgsConstructor;
 

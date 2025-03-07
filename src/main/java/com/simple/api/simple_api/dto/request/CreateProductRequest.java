@@ -2,7 +2,7 @@ package com.simple.api.simple_api.dto.request;
 
 import java.math.BigDecimal;
 
-import com.simple.api.simple_api.model.Category;
+import com.simple.api.simple_api.repository.model.Category;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

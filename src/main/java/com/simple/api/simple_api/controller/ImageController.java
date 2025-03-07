@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.simple.api.simple_api.dto.helper.ImageDto;
 import com.simple.api.simple_api.dto.response.ApiResponse;
+import com.simple.api.simple_api.dto.response.ImageDto;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
-import com.simple.api.simple_api.model.Image;
+import com.simple.api.simple_api.repository.model.Image;
 import com.simple.api.simple_api.service.image.IImageService;
 
 import lombok.RequiredArgsConstructor;

@@ -6,9 +6,9 @@ import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
-import com.simple.api.simple_api.model.Cart;
 import com.simple.api.simple_api.repository.CartItemRepository;
 import com.simple.api.simple_api.repository.CartRepository;
+import com.simple.api.simple_api.repository.model.Cart;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

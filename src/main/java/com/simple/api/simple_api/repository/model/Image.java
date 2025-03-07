@@ -1,4 +1,4 @@
-package com.simple.api.simple_api.model;
+package com.simple.api.simple_api.repository.model;
 
 
 import java.sql.Blob;

@@ -8,15 +8,15 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import com.simple.api.simple_api.dto.helper.OrderDto;
+import com.simple.api.simple_api.dto.response.OrderDto;
 import com.simple.api.simple_api.enums.OrderStatus;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
-import com.simple.api.simple_api.model.Cart;
-import com.simple.api.simple_api.model.Order;
-import com.simple.api.simple_api.model.OrderItem;
-import com.simple.api.simple_api.model.Product;
 import com.simple.api.simple_api.repository.OrderRepository;
 import com.simple.api.simple_api.repository.ProductRepository;
+import com.simple.api.simple_api.repository.model.Cart;
+import com.simple.api.simple_api.repository.model.Order;
+import com.simple.api.simple_api.repository.model.OrderItem;
+import com.simple.api.simple_api.repository.model.Product;
 import com.simple.api.simple_api.service.cart.ICartService;
 
 import jakarta.transaction.Transactional;

@@ -1,4 +1,4 @@
-package com.simple.api.simple_api.dto.helper;
+package com.simple.api.simple_api.dto.response;
 
 import java.math.BigDecimal;
 

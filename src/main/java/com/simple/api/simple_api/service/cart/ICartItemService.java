@@ -1,6 +1,6 @@
 package com.simple.api.simple_api.service.cart;
 
-import com.simple.api.simple_api.model.CartItem;
+import com.simple.api.simple_api.repository.model.CartItem;
 
 public interface ICartItemService {
  

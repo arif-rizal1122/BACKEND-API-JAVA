@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.simple.api.simple_api.dto.helper.ProductDto;
 import com.simple.api.simple_api.dto.request.CreateProductRequest;
 import com.simple.api.simple_api.dto.request.UpdateProductRequest;
 import com.simple.api.simple_api.dto.response.ApiResponse;
+import com.simple.api.simple_api.dto.response.ProductDto;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
-import com.simple.api.simple_api.model.Product;
+import com.simple.api.simple_api.repository.model.Product;
 import com.simple.api.simple_api.service.product.IProductService;
 
 import lombok.RequiredArgsConstructor;

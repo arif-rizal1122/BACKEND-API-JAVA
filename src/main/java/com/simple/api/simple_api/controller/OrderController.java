@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.simple.api.simple_api.dto.helper.OrderDto;
 import com.simple.api.simple_api.dto.response.ApiResponse;
+import com.simple.api.simple_api.dto.response.OrderDto;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
-import com.simple.api.simple_api.model.Order;
+import com.simple.api.simple_api.repository.model.Order;
 import com.simple.api.simple_api.service.order.IOrderService;
 
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,9 @@
-package com.simple.api.simple_api.dto.helper;
+package com.simple.api.simple_api.dto.response;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.simple.api.simple_api.model.Category;
+import com.simple.api.simple_api.repository.model.Category;
 
 import lombok.Data;
 

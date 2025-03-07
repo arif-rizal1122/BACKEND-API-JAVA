@@ -5,11 +5,11 @@ import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
-import com.simple.api.simple_api.model.Cart;
-import com.simple.api.simple_api.model.CartItem;
-import com.simple.api.simple_api.model.Product;
 import com.simple.api.simple_api.repository.CartItemRepository;
 import com.simple.api.simple_api.repository.CartRepository;
+import com.simple.api.simple_api.repository.model.Cart;
+import com.simple.api.simple_api.repository.model.CartItem;
+import com.simple.api.simple_api.repository.model.Product;
 import com.simple.api.simple_api.service.product.IProductService;
 
 import jakarta.transaction.Transactional;
