@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.simple.api.simple_api.dto.helper.OrderDto;
 import com.simple.api.simple_api.dto.response.ApiResponse;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
 import com.simple.api.simple_api.model.Order;
@@ -42,7 +43,7 @@ public class OrderController {
     @GetMapping("/{orderId}/order")
     public ResponseEntity<ApiResponse> getOrderById(@PathVariable("orderId") Long orderId){
         try {
-            Order order = orderService.getOrder(orderId);
+            OrderDto order = orderService.getOrder(orderId);
             return ResponseEntity.ok(new ApiResponse("get order success", order));
         } catch (ResponseNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("order not found", e.getMessage()));
@@ -56,7 +57,7 @@ public class OrderController {
     @GetMapping("/{userId}/order")
     public ResponseEntity<ApiResponse> getUserOrders(@PathVariable("userId") Long userId){
         try {
-            List<Order> order = orderService.getUserOrders(userId);
+            List<OrderDto> order = orderService.getUserOrders(userId);
             return ResponseEntity.ok(new ApiResponse("get user orders success", order));
         } catch (ResponseNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("user orders not found", e.getMessage()));

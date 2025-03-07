@@ -5,8 +5,10 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import com.simple.api.simple_api.dto.helper.OrderDto;
 import com.simple.api.simple_api.enums.OrderStatus;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
 import com.simple.api.simple_api.model.Cart;
@@ -30,6 +32,8 @@ public class OrderService implements IOrderService {
     private final ProductRepository productRepository;
 
     private final ICartService cartService;
+
+    private final ModelMapper modelMapper;
     
 
     @Override
@@ -50,9 +54,10 @@ public class OrderService implements IOrderService {
 
 
     @Override
-    public Order getOrder(Long orderId) {
+    public OrderDto getOrder(Long orderId) {
         return orderRepository.findById(orderId)
-        .orElseThrow(() -> new ResponseNotFoundException("order id not found"));
+                .map(this :: convertToDto)
+                .orElseThrow(() -> new ResponseNotFoundException("order not found"));
     }
 
 
@@ -90,8 +95,17 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public List<Order> getUserOrders(Long userId){
-        return orderRepository.findByUserId(userId);
+    public List<OrderDto> getUserOrders(Long userId){
+        List<Order> orders = orderRepository.findByUserId(userId);
+        return orders.stream()
+                     .map(this :: convertToDto).toList();
     }
+    
+
+
+    private OrderDto convertToDto(Order order){
+        return modelMapper.map(order, OrderDto.class);
+    }
+
 
 }
