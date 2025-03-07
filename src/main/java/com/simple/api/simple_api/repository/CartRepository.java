@@ -7,5 +7,5 @@ import com.simple.api.simple_api.model.Cart;
 
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long> {
-    
+    Cart findByUserId(Long userId);
 }
