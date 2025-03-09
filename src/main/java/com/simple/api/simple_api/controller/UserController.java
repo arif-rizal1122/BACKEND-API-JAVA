@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.simple.api.simple_api.dto.request.CreateUserRequest;
 import com.simple.api.simple_api.dto.request.UpdateUserRequest;
 import com.simple.api.simple_api.dto.response.ApiResponse;
+import com.simple.api.simple_api.dto.response.UserDto;
 import com.simple.api.simple_api.exception.AlreadyExistException;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
-import com.simple.api.simple_api.repository.model.User;
+import com.simple.api.simple_api.model.User;
 import com.simple.api.simple_api.service.user.IUserService;
 
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,8 @@ public class UserController {
     public ResponseEntity<ApiResponse> getUserById(@PathVariable("userId") Long userId){
         try {
             User user = userService.getByUserId(userId);
-            return ResponseEntity.ok(new ApiResponse("success get user", user));
+            UserDto userDto = userService.convertUserToDto(user);
+            return ResponseEntity.ok(new ApiResponse("success get user", userDto));
         } catch (ResponseNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("user not found", e.getMessage()));
         } catch (Exception e){
@@ -45,7 +47,8 @@ public class UserController {
     public ResponseEntity<ApiResponse> createUser(@RequestBody CreateUserRequest request){
          try {
             User user = userService.createUser(request);
-             return ResponseEntity.ok(new ApiResponse("create success user", user));
+            UserDto userDto = userService.convertUserToDto(user);
+            return ResponseEntity.ok(new ApiResponse("create success user", userDto));
         } catch (AlreadyExistException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponse(e.getMessage(), null));
         } catch (Exception e){
@@ -58,7 +61,8 @@ public class UserController {
     public ResponseEntity<ApiResponse> updateUser(@RequestBody UpdateUserRequest request, @PathVariable("userId") Long userId){
         try {
             User user = userService.updateUser(request, userId);
-            return ResponseEntity.ok(new ApiResponse("update success user", user));
+            UserDto userDto = userService.convertUserToDto(user);
+            return ResponseEntity.ok(new ApiResponse("update success user", userDto));
         } catch (ResponseNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse("user not found", e.getMessage()));
         } catch (Exception e){

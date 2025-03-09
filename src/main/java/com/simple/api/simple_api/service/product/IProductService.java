@@ -5,7 +5,7 @@ import java.util.List;
 import com.simple.api.simple_api.dto.request.CreateProductRequest;
 import com.simple.api.simple_api.dto.request.UpdateProductRequest;
 import com.simple.api.simple_api.dto.response.ProductDto;
-import com.simple.api.simple_api.repository.model.Product;
+import com.simple.api.simple_api.model.Product;
 
 public interface IProductService {
 

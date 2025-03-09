@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.simple.api.simple_api.dto.response.ImageDto;
-import com.simple.api.simple_api.repository.model.Image;
+import com.simple.api.simple_api.model.Image;
 
 public interface IImageService {
     

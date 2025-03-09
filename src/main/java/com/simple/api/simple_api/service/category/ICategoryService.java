@@ -2,7 +2,7 @@ package com.simple.api.simple_api.service.category;
 
 import java.util.List;
 
-import com.simple.api.simple_api.repository.model.Category;
+import com.simple.api.simple_api.model.Category;
 
 public interface ICategoryService {
     

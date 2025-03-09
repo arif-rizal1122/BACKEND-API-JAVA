@@ -11,12 +11,12 @@ import com.simple.api.simple_api.dto.request.UpdateProductRequest;
 import com.simple.api.simple_api.dto.response.ImageDto;
 import com.simple.api.simple_api.dto.response.ProductDto;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
+import com.simple.api.simple_api.model.Category;
+import com.simple.api.simple_api.model.Image;
+import com.simple.api.simple_api.model.Product;
 import com.simple.api.simple_api.repository.CategoryRepository;
 import com.simple.api.simple_api.repository.ImageRepository;
 import com.simple.api.simple_api.repository.ProductRepository;
-import com.simple.api.simple_api.repository.model.Category;
-import com.simple.api.simple_api.repository.model.Image;
-import com.simple.api.simple_api.repository.model.Product;
 
 import lombok.RequiredArgsConstructor;
 

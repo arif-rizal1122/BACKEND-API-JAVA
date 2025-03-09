@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.simple.api.simple_api.exception.AlreadyExistException;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
+import com.simple.api.simple_api.model.Category;
 import com.simple.api.simple_api.repository.CategoryRepository;
-import com.simple.api.simple_api.repository.model.Category;
 
 import lombok.RequiredArgsConstructor;
 

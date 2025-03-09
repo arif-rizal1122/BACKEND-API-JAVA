@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.simple.api.simple_api.dto.response.ApiResponse;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
-import com.simple.api.simple_api.repository.model.CartItem;
+import com.simple.api.simple_api.model.CartItem;
 import com.simple.api.simple_api.service.cart.ICartItemService;
 import com.simple.api.simple_api.service.cart.ICartService;
 

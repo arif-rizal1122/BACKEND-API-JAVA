@@ -2,14 +2,16 @@ package com.simple.api.simple_api.service.user;
 
 import java.util.Optional;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.simple.api.simple_api.dto.request.CreateUserRequest;
 import com.simple.api.simple_api.dto.request.UpdateUserRequest;
+import com.simple.api.simple_api.dto.response.UserDto;
 import com.simple.api.simple_api.exception.AlreadyExistException;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
+import com.simple.api.simple_api.model.User;
 import com.simple.api.simple_api.repository.UserRepository;
-import com.simple.api.simple_api.repository.model.User;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,6 +20,8 @@ import lombok.RequiredArgsConstructor;
 public class UserService implements IUserService{
 
     private final UserRepository userRepository;
+
+    private final ModelMapper modelMapper;
 
 
     @Override
@@ -61,5 +65,9 @@ public class UserService implements IUserService{
     }
     
     
+    @Override
+    public UserDto convertUserToDto(User user){
+        return modelMapper.map(user, UserDto.class);
+    }
 
 }

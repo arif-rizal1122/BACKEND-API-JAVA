@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.simple.api.simple_api.dto.response.ApiResponse;
 import com.simple.api.simple_api.exception.AlreadyExistException;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
-import com.simple.api.simple_api.repository.model.Category;
+import com.simple.api.simple_api.model.Category;
 import com.simple.api.simple_api.service.category.ICategoryService;
 
 import lombok.RequiredArgsConstructor;

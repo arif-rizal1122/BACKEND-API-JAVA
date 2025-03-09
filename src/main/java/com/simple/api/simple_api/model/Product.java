@@ -1,4 +1,4 @@
-package com.simple.api.simple_api.repository.model;
+package com.simple.api.simple_api.model;
 
 import java.math.BigDecimal;
 import java.util.List;

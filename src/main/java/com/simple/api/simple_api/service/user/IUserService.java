@@ -2,7 +2,8 @@ package com.simple.api.simple_api.service.user;
 
 import com.simple.api.simple_api.dto.request.CreateUserRequest;
 import com.simple.api.simple_api.dto.request.UpdateUserRequest;
-import com.simple.api.simple_api.repository.model.User;
+import com.simple.api.simple_api.dto.response.UserDto;
+import com.simple.api.simple_api.model.User;
 
 public interface IUserService {
     
@@ -13,6 +14,8 @@ public interface IUserService {
     User updateUser(UpdateUserRequest request, Long userId);
     
     void deleteUser(Long userId);
+
+    UserDto convertUserToDto(User user);
 
 }
  
