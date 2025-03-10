@@ -1,7 +1,7 @@
 package com.simple.api.simple_api.dto.response;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import lombok.Data;
@@ -15,7 +15,7 @@ public class OrderDto {
 
     private Long userId;
 
-    private LocalDateTime orderDate;
+    private LocalTime orderDate;
 
     private BigDecimal totalAmount;
 

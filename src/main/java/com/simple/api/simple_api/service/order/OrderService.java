@@ -1,7 +1,7 @@
 package com.simple.api.simple_api.service.order;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
 
@@ -66,7 +66,7 @@ public class OrderService implements IOrderService {
         Order order = new Order();
         order.setUser(cart.getUser()); 
         order.setOrderStatus(OrderStatus.PENDING);
-        order.setOrderDate(LocalDateTime.now());
+        order.setOrderDate(LocalTime.now());
         return order;
     }
 
@@ -102,8 +102,8 @@ public class OrderService implements IOrderService {
     }
     
 
-
-    private OrderDto convertToDto(Order order){
+    @Override
+    public convertToDto(Order order){
         return modelMapper.map(order, OrderDto.class);
     }
 
