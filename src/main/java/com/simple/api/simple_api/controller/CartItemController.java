@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.simple.api.simple_api.dto.response.ApiResponse;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
+import com.simple.api.simple_api.model.Cart;
 import com.simple.api.simple_api.model.CartItem;
+import com.simple.api.simple_api.model.User;
 import com.simple.api.simple_api.service.cart.ICartItemService;
 import com.simple.api.simple_api.service.cart.ICartService;
+import com.simple.api.simple_api.service.user.IUserService;
 
 import lombok.RequiredArgsConstructor;
  
@@ -28,19 +31,17 @@ public class CartItemController {
 
     private final ICartService cartService;
     
+    private final IUserService userService;
 
     @PostMapping("/item/add")
-    public ResponseEntity<ApiResponse> addItemToCart(@RequestParam(required = false) Long cartId,
+    public ResponseEntity<ApiResponse> addItemToCart(
                                                     @RequestParam Long productId,
                                                     @RequestParam Integer quantity) {
         try {
-            if (cartId == null) {
-                cartId = cartService.initializeNewCart();
-                if (cartId == null) {
-                    throw new ResponseNotFoundException("Failed to initialize new cart");
-                }
-            }
-            cartItemService.addItemToCart(cartId, productId, quantity);
+            User user = userService.getByUserId(1L);
+            Cart cart = cartService.initializeNewCart(user);
+              
+            cartItemService.addItemToCart(cart.getId(), productId, quantity);
             return ResponseEntity.ok(new ApiResponse("Add Item Success", null));
         } catch (ResponseNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(), null));

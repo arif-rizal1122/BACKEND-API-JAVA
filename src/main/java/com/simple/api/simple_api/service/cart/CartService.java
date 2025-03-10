@@ -1,12 +1,13 @@
 package com.simple.api.simple_api.service.cart;
 
 import java.math.BigDecimal;
-
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
 import com.simple.api.simple_api.model.Cart;
+import com.simple.api.simple_api.model.User;
 import com.simple.api.simple_api.repository.CartItemRepository;
 import com.simple.api.simple_api.repository.CartRepository;
 
@@ -50,9 +51,13 @@ public class CartService implements ICartService{
     }
 
     @Override
-    public Long initializeNewCart() {
-        Cart newCart = new Cart();
-        return cartRepository.save(newCart).getId(); 
+    public Cart initializeNewCart(User user) {
+        return Optional.ofNullable(getCartByUserId(user.getId()))
+                    .orElseGet(() -> {
+                        Cart cart = new Cart();
+                        cart.setUser(user);
+                        return cartRepository.save(cart);
+                    });
     }
     
 
