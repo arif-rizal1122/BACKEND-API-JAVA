@@ -1,7 +1,6 @@
 package com.simple.api.simple_api.service.product;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -98,14 +97,16 @@ public class ProductService implements IProductService{
     //
     @Override
     public Product addProduct(CreateProductRequest request) {
-        Category category = Optional.ofNullable(categoryRepository.findByName(request.getCategory().getName()))
-        .orElseGet(() -> {
-            Category newCategory = new Category(request.getCategory().getName());
-            return categoryRepository.save(newCategory);
-        }); 
+        Category category = categoryRepository.findByName(request.getCategory().getName())
+            .orElseGet(() -> {
+                Category newCategory = new Category(request.getCategory().getName());
+                return categoryRepository.save(newCategory);
+            });
+    
         request.setCategory(category);
         return productRepository.save(createProduct(request, category));
     }
+    
 
     private Product createProduct(CreateProductRequest request, Category category){
         return new Product(
@@ -137,7 +138,10 @@ public class ProductService implements IProductService{
         existingProduct.setInventory(request.getInventory());
         existingProduct.setDescription(request.getDescription());
 
-        Category category = categoryRepository.findByName(request.getCategory().getName());
+        Category category = categoryRepository.findByName(request.getCategory().getName()).orElseGet(() -> {
+            Category newCategory = new Category(request.getCategory().getName());
+            return categoryRepository.save(newCategory);
+        });
         existingProduct.setCategory(category);
         return existingProduct;
     }

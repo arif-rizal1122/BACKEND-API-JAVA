@@ -31,9 +31,10 @@ public class CategoryService implements ICategoryService {
     //
     @Override
     public Category getCategoryByName(String name) {
-        return categoryRepository.findByName(name);
+        return categoryRepository.findByName(name)
+            .orElseGet(() -> new Category(name)); 
     }
-
+    
 
 
     //
