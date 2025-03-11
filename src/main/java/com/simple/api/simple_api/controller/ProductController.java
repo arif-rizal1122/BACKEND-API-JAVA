@@ -18,6 +18,7 @@ import com.simple.api.simple_api.dto.request.CreateProductRequest;
 import com.simple.api.simple_api.dto.request.UpdateProductRequest;
 import com.simple.api.simple_api.dto.response.ApiResponse;
 import com.simple.api.simple_api.dto.response.ProductDto;
+import com.simple.api.simple_api.exception.AlreadyExistException;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
 import com.simple.api.simple_api.model.Product;
 import com.simple.api.simple_api.service.product.IProductService;
@@ -57,7 +58,10 @@ public class ProductController {
         try {
             Product product = productService.addProduct(request);
             return ResponseEntity.ok(new ApiResponse("add product success!", product));
-        } catch (Exception e) {
+        } catch (AlreadyExistException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponse("product name "+ request.getName() + " or " + " product brand " +request.getBrand() + " already exists", null));
+        }
+         catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse("add product failed", e.getMessage()));
         }
     }

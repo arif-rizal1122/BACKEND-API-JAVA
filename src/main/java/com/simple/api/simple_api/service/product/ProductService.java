@@ -9,6 +9,7 @@ import com.simple.api.simple_api.dto.request.CreateProductRequest;
 import com.simple.api.simple_api.dto.request.UpdateProductRequest;
 import com.simple.api.simple_api.dto.response.ImageDto;
 import com.simple.api.simple_api.dto.response.ProductDto;
+import com.simple.api.simple_api.exception.AlreadyExistException;
 import com.simple.api.simple_api.exception.ResponseNotFoundException;
 import com.simple.api.simple_api.model.Category;
 import com.simple.api.simple_api.model.Image;
@@ -97,6 +98,10 @@ public class ProductService implements IProductService{
     //
     @Override
     public Product addProduct(CreateProductRequest request) {
+        if (productExists(request.getName(), request.getBrand())) {
+            throw new AlreadyExistException(request.getBrand() +" "+ request.getName() + " already exists, you may update this product");
+        }
+
         Category category = categoryRepository.findByName(request.getCategory().getName())
             .orElseGet(() -> {
                 Category newCategory = new Category(request.getCategory().getName());
@@ -105,6 +110,12 @@ public class ProductService implements IProductService{
     
         request.setCategory(category);
         return productRepository.save(createProduct(request, category));
+    }
+
+
+
+    private boolean productExists(String name, String brand){
+         return productRepository.existsByNameAndBrand(name, brand);
     }
     
 

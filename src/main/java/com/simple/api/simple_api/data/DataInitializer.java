@@ -59,8 +59,9 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     private void createDefaultProductIfNotExists(){
         for (int i = 1; i <= 5; i++) {
             String productName = "product " + i;
-            if (productRepository.existsByName(productName)) {
-                log.info("Product {} already exists, skipping...", productName);
+            String productBrand ="brand " + i; 
+            if (productRepository.existsByNameAndBrand(productName, productBrand)) {
+                log.info("Product {} already exists, skipping...", productName, productBrand);
                 continue;
             }
 
