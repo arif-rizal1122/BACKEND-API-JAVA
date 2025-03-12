@@ -1,4 +1,4 @@
-package com.simple.api.simple_api.config;
+package com.simple.api.simple_api.security.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
