@@ -19,6 +19,7 @@ import com.simple.api.simple_api.service.cart.ICartItemService;
 import com.simple.api.simple_api.service.cart.ICartService;
 import com.simple.api.simple_api.service.user.IUserService;
 
+import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
  
 
@@ -38,18 +39,22 @@ public class CartItemController {
                                                     @RequestParam Long productId,
                                                     @RequestParam Integer quantity) {
         try {
-            User user = userService.getByUserId(2L);
+            User user = userService.getAuthenticatedUser();
             Cart cart = cartService.initializeNewCart(user);
               
             cartItemService.addItemToCart(cart.getId(), productId, quantity);
             return ResponseEntity.ok(new ApiResponse("Add Item Success", null));
         } catch (ResponseNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage(), null));
-        } catch (Exception e) {
+        } 
+        catch (JwtException e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse(e.getMessage(), null));
+        }
+        catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                                  .body(new ApiResponse("Failed to add item to cart: " + e.getMessage(), null));
                                  
-        }
+        } 
     }
 
 

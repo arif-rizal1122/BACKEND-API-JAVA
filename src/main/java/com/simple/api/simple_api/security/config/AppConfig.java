@@ -32,7 +32,7 @@ public class AppConfig {
 
     private final JwtAuthEntryPoint authEntryPoint;
 
-    private static final List<String> SECURED_URLS = List.of("");
+    private static final List<String> SECURED_URLS = List.of();
 
     @Bean
     public ModelMapper modelMapper(){
@@ -68,12 +68,16 @@ public class AppConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(authEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth ->  auth.requestMatchers(SECURED_URLS.toArray(String[]::new)).authenticated()
-                                                .anyRequest().permitAll());
-   
+                .authorizeHttpRequests(auth -> {
+                    if (!SECURED_URLS.isEmpty()) {
+                        auth.requestMatchers(SECURED_URLS.toArray(String[]::new)).authenticated();
+                    }
+                    auth.anyRequest().permitAll();
+                });
                 http.authenticationProvider(daoAuthenticationProvider());
                 http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
                 return http.build();
     }
+    
 
 }
