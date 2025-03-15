@@ -32,7 +32,7 @@ public class AppConfig {
 
     private final JwtAuthEntryPoint authEntryPoint;
 
-    private static final List<String> SECURED_URLS = List.of();
+    private static final List<String> SECURED_URLS = List.of("/api/v1/carts/**", "/api/v1/cartItems/**");
 
     @Bean
     public ModelMapper modelMapper(){
