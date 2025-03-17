@@ -29,26 +29,20 @@ import lombok.RequiredArgsConstructor;
 public class AppConfig {
 
     private final ShopUserDetailsService userDetailsService;
-
     private final JwtAuthEntryPoint authEntryPoint;
+    private final AuthTokenFilter authTokenFilter; // Tambahkan ini
 
     private static final List<String> SECURED_URLS = List.of("/api/v1/carts/**", "/api/v1/cartItems/**");
 
     @Bean
     public ModelMapper modelMapper(){
         return new ModelMapper();
-    };
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
-    @Bean
-    public AuthTokenFilter authTokenFilter(){
-        return new AuthTokenFilter();
-    }
-
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception{
@@ -74,10 +68,12 @@ public class AppConfig {
                     }
                     auth.anyRequest().permitAll();
                 });
-                http.authenticationProvider(daoAuthenticationProvider());
-                http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-                return http.build();
-    }
-    
 
+        http.authenticationProvider(daoAuthenticationProvider());
+
+        // Gunakan instance yang sudah disuntikkan oleh Spring
+        http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
 }
